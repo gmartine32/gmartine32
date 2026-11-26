@@ -1,0 +1,236 @@
+<svg width="1200" height="290" viewBox="0 0 1200 290" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Fondo oscuro profundo -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1200" y2="290" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#070B14"/>
+      <stop offset="50%" stop-color="#0D1526"/>
+      <stop offset="100%" stop-color="#0A1020"/>
+    </linearGradient>
+
+    <!-- Gradiente para el nombre -->
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="48%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+
+    <!-- Gradiente para las líneas de flujo -->
+    <linearGradient id="lineCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.18"/>
+      <stop offset="50%" stop-color="#38BDF8" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0.35"/>
+    </linearGradient>
+
+    <linearGradient id="lineViolet" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.25"/>
+      <stop offset="50%" stop-color="#818CF8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#34D399" stop-opacity="0.4"/>
+    </linearGradient>
+
+    <!-- Brillos radiales ambientales -->
+    <radialGradient id="glowLeft" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="glowRight" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+
+    <radialGradient id="glowMint" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Patrón de grilla sutil -->
+    <pattern id="dotGrid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1" fill="#334155" fill-opacity="0.38"/>
+    </pattern>
+
+    <!-- Filtro de resplandor para partículas -->
+    <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Rutas del grafo de datos/IA -->
+    <path id="flowTop" d="M 730 92 C 800 56, 865 56, 930 92 C 995 128, 1055 128, 1118 92"/>
+    <path id="flowMid" d="M 730 150 C 810 150, 860 150, 930 150 C 1000 150, 1055 150, 1118 150"/>
+    <path id="flowBot" d="M 730 208 C 800 244, 865 244, 930 208 C 995 172, 1055 172, 1118 208"/>
+    <path id="flowCross1" d="M 730 92 C 825 110, 845 140, 930 150 C 1015 160, 1040 190, 1118 208"/>
+    <path id="flowCross2" d="M 730 208 C 825 190, 845 160, 930 150 C 1015 140, 1040 110, 1118 92"/>
+
+    <clipPath id="cardClip">
+      <rect width="1200" height="290" rx="18"/>
+    </clipPath>
+  </defs>
+
+  <style>
+    .sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.85); }
+    }
+    @keyframes auroraFloat {
+      0%, 100% { transform: translate(0px, 0px); opacity: 0.85; }
+      50% { transform: translate(18px, -10px); opacity: 1; }
+    }
+    @keyframes auroraFloatRev {
+      0%, 100% { transform: translate(0px, 0px); opacity: 0.8; }
+      50% { transform: translate(-18px, 12px); opacity: 1; }
+    }
+    @keyframes nodeBreath {
+      0%, 100% { stroke-opacity: 0.55; }
+      50% { stroke-opacity: 1; }
+    }
+    @keyframes scanLine {
+      0% { transform: translateX(-280px); opacity: 0; }
+      15% { opacity: 0.45; }
+      85% { opacity: 0.45; }
+      100% { transform: translateX(1220px); opacity: 0; }
+    }
+
+    .live-dot { transform-box: fill-box; transform-origin: center; animation: pulseDot 2.2s ease-in-out infinite; }
+    .aurora-l { animation: auroraFloat 9s ease-in-out infinite; }
+    .aurora-r { animation: auroraFloatRev 11s ease-in-out infinite; }
+    .node-box { animation: nodeBreath 4s ease-in-out infinite; }
+    .scan-bar { animation: scanLine 7.5s linear infinite; }
+  </style>
+
+  <g clip-path="url(#cardClip)">
+    <!-- Base -->
+    <rect width="1200" height="290" fill="url(#bgGrad)"/>
+    <rect width="1200" height="290" fill="url(#dotGrid)"/>
+
+    <!-- Auroras animadas sutiles -->
+    <ellipse class="aurora-l" cx="210" cy="70" rx="280" ry="170" fill="url(#glowLeft)"/>
+    <ellipse class="aurora-r" cx="960" cy="145" rx="300" ry="190" fill="url(#glowRight)"/>
+    <ellipse class="aurora-l" cx="1090" cy="240" rx="180" ry="120" fill="url(#glowMint)"/>
+
+    <!-- Línea superior luminosa deslizante -->
+    <rect x="0" y="0" width="1200" height="2" fill="#1E293B"/>
+    <rect class="scan-bar" x="0" y="0" width="240" height="2.5" fill="url(#titleGrad)"/>
+
+    <!-- ================= LADO IZQUIERDO: IDENTIDAD ================= -->
+    <!-- Pill de estado en vivo -->
+    <g transform="translate(52, 42)">
+      <rect width="390" height="30" rx="15" fill="#0F172A" fill-opacity="0.88" stroke="#1E293B" stroke-width="1"/>
+      <circle class="live-dot" cx="18" cy="15" r="4.5" fill="#10B981" filter="url(#softGlow)"/>
+      <text x="32" y="19" class="mono" font-size="11.5" font-weight="600" fill="#94A3B8" letter-spacing="0.9">
+        BARRANQUILLA, CO  •  4+ YRS EXP  •  REMOTE
+      </text>
+    </g>
+
+    <!-- Nombre principal -->
+    <text x="52" y="132" class="sans" font-size="46" font-weight="800" fill="url(#titleGrad)" letter-spacing="-0.6">
+      GIAN FRANCO MARTINEZ
+    </text>
+
+    <!-- Subtítulo profesional -->
+    <text x="54" y="168" class="sans" font-size="18.5" font-weight="500" fill="#CBD5E1">
+      Senior Full Stack Engineer  •  AI &amp; RAG Systems  •  Data Engineer &amp; Analyst
+    </text>
+
+    <!-- Línea divisoria sutil -->
+    <line x1="54" y1="192" x2="620" y2="192" stroke="#1E293B" stroke-width="1"/>
+
+    <!-- 3 Pills de especialidad -->
+    <g transform="translate(52, 212)">
+      <rect width="176" height="34" rx="9" fill="#0F172A" fill-opacity="0.9" stroke="#38BDF8" stroke-opacity="0.38" stroke-width="1"/>
+      <text x="88" y="21.5" text-anchor="middle" class="mono" font-size="12" font-weight="600" fill="#7DD3FC">
+        TS • React • Node
+      </text>
+
+      <rect x="190" width="188" height="34" rx="9" fill="#0F172A" fill-opacity="0.9" stroke="#818CF8" stroke-opacity="0.4" stroke-width="1"/>
+      <text x="284" y="21.5" text-anchor="middle" class="mono" font-size="12" font-weight="600" fill="#C7D2FE">
+        LLM Agents • RAG
+      </text>
+
+      <rect x="392" width="192" height="34" rx="9" fill="#0F172A" fill-opacity="0.9" stroke="#34D399" stroke-opacity="0.38" stroke-width="1"/>
+      <text x="488" y="21.5" text-anchor="middle" class="mono" font-size="12" font-weight="600" fill="#6EE7B7">
+        GCP • BigQuery • dbt
+      </text>
+    </g>
+
+    <!-- ================= LADO DERECHO: GRAFO ANIMADO FULL-STACK / AI / DATA ================= -->
+    <g opacity="0.95">
+      <!-- Conexiones -->
+      <use href="#flowTop" stroke="url(#lineCyan)" stroke-width="1.6" fill="none"/>
+      <use href="#flowMid" stroke="url(#lineViolet)" stroke-width="1.6" fill="none"/>
+      <use href="#flowBot" stroke="url(#lineCyan)" stroke-width="1.6" fill="none"/>
+      <use href="#flowCross1" stroke="#334155" stroke-opacity="0.65" stroke-width="1.2" stroke-dasharray="4 4" fill="none"/>
+      <use href="#flowCross2" stroke="#334155" stroke-opacity="0.65" stroke-width="1.2" stroke-dasharray="4 4" fill="none"/>
+
+      <!-- Partículas luminosas viajando por los pipelines -->
+      <circle r="3.6" fill="#38BDF8" filter="url(#softGlow)">
+        <animateMotion dur="3.6s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#flowTop"/>
+        </animateMotion>
+      </circle>
+      <circle r="3.8" fill="#818CF8" filter="url(#softGlow)">
+        <animateMotion dur="3.1s" repeatCount="indefinite" begin="0.4s">
+          <mpath href="#flowMid"/>
+        </animateMotion>
+      </circle>
+      <circle r="3.4" fill="#34D399" filter="url(#softGlow)">
+        <animateMotion dur="4.0s" repeatCount="indefinite" begin="1.1s">
+          <mpath href="#flowBot"/>
+        </animateMotion>
+      </circle>
+      <circle r="2.8" fill="#F472B6" filter="url(#softGlow)">
+        <animateMotion dur="4.6s" repeatCount="indefinite" begin="0.8s">
+          <mpath href="#flowCross1"/>
+        </animateMotion>
+      </circle>
+      <circle r="2.8" fill="#38BDF8" filter="url(#softGlow)">
+        <animateMotion dur="4.8s" repeatCount="indefinite" begin="2.0s">
+          <mpath href="#flowCross2"/>
+        </animateMotion>
+      </circle>
+
+      <!-- Columna 1: Sources / Apps -->
+      <g transform="translate(665, 72)">
+        <rect class="node-box" width="96" height="40" rx="10" fill="#0B1221" stroke="#38BDF8" stroke-width="1.2"/>
+        <text x="48" y="24" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#E0F2FE">APIs / Kafka</text>
+      </g>
+      <g transform="translate(665, 130)">
+        <rect class="node-box" width="96" height="40" rx="10" fill="#0B1221" stroke="#818CF8" stroke-width="1.2"/>
+        <text x="48" y="24" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#E0E7FF">LLM / RAG</text>
+      </g>
+      <g transform="translate(665, 188)">
+        <rect class="node-box" width="96" height="40" rx="10" fill="#0B1221" stroke="#34D399" stroke-width="1.2"/>
+        <text x="48" y="24" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#D1FAE5">ELT / Bronze</text>
+      </g>
+
+      <!-- Columna 2: Core Engine -->
+      <g transform="translate(882, 126)">
+        <rect class="node-box" width="98" height="48" rx="12" fill="#111C33" stroke="#60A5FA" stroke-width="1.6" filter="url(#softGlow)"/>
+        <text x="49" y="21" text-anchor="middle" class="mono" font-size="10" font-weight="600" fill="#93C5FD">CORE ENGINE</text>
+        <text x="49" y="37" text-anchor="middle" class="mono" font-size="11.5" font-weight="700" fill="#F8FAFC">Py • TS • SQL</text>
+      </g>
+
+      <!-- Columna 3: Delivery -->
+      <g transform="translate(1070, 72)">
+        <rect class="node-box" width="92" height="40" rx="10" fill="#0B1221" stroke="#38BDF8" stroke-width="1.2"/>
+        <text x="46" y="24" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#E0F2FE">Web / Apps</text>
+      </g>
+      <g transform="translate(1070, 130)">
+        <rect class="node-box" width="92" height="40" rx="10" fill="#0B1221" stroke="#818CF8" stroke-width="1.2"/>
+        <text x="46" y="24" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#E0E7FF">AI Agents</text>
+      </g>
+      <g transform="translate(1070, 188)">
+        <rect class="node-box" width="92" height="40" rx="10" fill="#0B1221" stroke="#34D399" stroke-width="1.2"/>
+        <text x="46" y="24" text-anchor="middle" class="mono" font-size="11" font-weight="700" fill="#D1FAE5">BQ • Gold</text>
+      </g>
+    </g>
+
+    <!-- Borde exterior sutil -->
+    <rect x="0.75" y="0.75" width="1198.5" height="288.5" rx="17.5" stroke="#1E293B" stroke-width="1.5"/>
+  </g>
+</svg>
